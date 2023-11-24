@@ -1,6 +1,6 @@
 // © Microsoft Corporation. All rights reserved.
-import React from 'react';
-import { Stack, PrimaryButton, Icon, Image, IImageStyles } from '@fluentui/react';
+import React, { useState } from 'react';
+import { Stack, PrimaryButton, Icon, Image, IImageStyles, Checkbox } from '@fluentui/react';
 import { VideoCameraEmphasisIcon } from '@fluentui/react-icons-northstar';
 import heroSVG from '../assets/hero.svg';
 import { utils } from '../Utils/Utils';
@@ -13,6 +13,7 @@ import {
     upperStackTokens,
     videoCameraIconStyle,
     buttonStyle,
+    checkboxStyle,
     nestedStackTokens,
     upperStackStyle,
     listItemStyle
@@ -47,6 +48,7 @@ export default (props: HomeScreenProps): JSX.Element => {
         'Create users with specific roles and add them to the Room.',
         'Generate a “Join link” for the users and join the Video call'
     ];
+    const [pstnDialOutEnabled, setPstnDialOut] = useState<boolean>(false);
 
     return (
         <Stack horizontal horizontalAlign="center" verticalAlign="center" tokens={containerTokens}>
@@ -69,16 +71,26 @@ export default (props: HomeScreenProps): JSX.Element => {
                 <div>Learn more about <a href="https://docs.microsoft.com/en-us/azure/communication-services/concepts/rooms/room-concept">
                     Rooms concept
                 </a></div>
-                <Stack horizontal className={upperStackStyle} tokens={upperStackTokens}>
+                <div>
+                    <Checkbox
+                        className={checkboxStyle}
+                        label="Enable PSTN Dial Out"
+                        onChange={(checked) => {
+                            const isChecked = checked ? true : false;
+                            setPstnDialOut(isChecked);
+                        }}
+                    />
+                 <Stack horizontal className={upperStackStyle} tokens={upperStackTokens}>
                     <PrimaryButton className={buttonStyle} onClick={async () => {
-                        const createRoomId = await utils.createRoom(props.userId);
+                        const createRoomId = await utils.createRoom(props.userId, pstnDialOutEnabled);
                         props.setRoomId(createRoomId);
                         props.setPage('edit');
                     }}>
                         <VideoCameraEmphasisIcon className={videoCameraIconStyle} size="medium" />
                         {createRoomButtonText}
-                    </PrimaryButton>
-                </Stack>
+                        </PrimaryButton>
+                    </Stack>
+                </div>
             </Stack>
             <Image
                 alt="Welcome to the Azure Communication Services Rooms sample app"

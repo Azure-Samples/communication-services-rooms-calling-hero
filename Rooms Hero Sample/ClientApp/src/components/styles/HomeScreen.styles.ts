@@ -47,6 +47,14 @@ export const buttonStyle = mergeStyles({
     padding: '0.625rem',
     margin: "0.3rem"
 });
+export const checkboxStyle = mergeStyles({
+    fontWeight: 400,
+    fontSize: '0.375rem', // 14px
+    height: '2.0rem',
+    borderRadius: 1,
+    padding: '0.25rem',
+    margin: "0.1rem"
+});
 export const upperStackStyle = mergeStyles({
     selectors: {
         '@media (max-width: 53.4375rem)': {
