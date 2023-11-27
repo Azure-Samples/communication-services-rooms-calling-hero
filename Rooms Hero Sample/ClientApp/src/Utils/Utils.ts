@@ -61,8 +61,6 @@ export const utils = {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            })
         };
         const response = await fetch(`/createRoom/${identity}?pstnDialOutEnabled=${pstnDialOutEnabled}`, requestOptions);
         if (response.ok) {
