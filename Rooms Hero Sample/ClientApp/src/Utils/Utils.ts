@@ -2,7 +2,6 @@
 import { AudioDeviceInfo, VideoDeviceInfo, RemoteVideoStream } from '@azure/communication-calling';
 import { CommunicationIdentifierKind } from '@azure/communication-common';
 import { CommunicationUserToken } from '@azure/communication-identity';
-import { Role } from '@azure/communication-react';
 import preval from 'preval.macro';
 import { v4 as uuid } from 'uuid';
 
@@ -28,6 +27,8 @@ export type UpdateParticipant = {
     role: Role;
     add: boolean;
 }
+
+export type Role = "Presenter" | "Attendee" | "Consumer"
 
 export const utils = {
 

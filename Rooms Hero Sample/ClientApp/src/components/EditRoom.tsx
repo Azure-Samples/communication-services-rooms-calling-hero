@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Stack, PrimaryButton, Icon } from '@fluentui/react';
 import { cellStyle, inputTokens, tableStyle, buttonStyle, gridBbuttonStyle } from './styles/EditRoom.styles';
 import { Input } from 'reactstrap';
-import { utils, UpdateParticipant, RoomParticipant } from '../Utils/Utils';
-import { Role } from '@azure/communication-react';
+import { utils, UpdateParticipant, RoomParticipant, Role } from '../Utils/Utils';
 import { iconStyle, listItemStyle, nestedStackTokens, editRoomStyle } from './styles/HomeScreen.styles';
 export interface EditRoomProps {
     roomId: string;

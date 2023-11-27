@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Stack, PrimaryButton, Icon, Image, IImageStyles, Checkbox } from '@fluentui/react';
 import { VideoCameraEmphasisIcon } from '@fluentui/react-icons-northstar';
 import heroSVG from '../assets/hero.svg';
-import { utils } from '../Utils/Utils';
+import { utils, Role } from '../Utils/Utils';
 import {
     imgStyle,
     containerTokens,
@@ -18,7 +18,6 @@ import {
     upperStackStyle,
     listItemStyle
 } from './styles/HomeScreen.styles';
-import { Role } from '@azure/communication-react';
 
 export interface HomeScreenProps {
     setPage(page: string): void;

@@ -4,8 +4,7 @@ import { Stack, PrimaryButton, Image, IImageStyles } from '@fluentui/react';
 import { buttonStyle, containerTokens, imgStyle, upperStackStyle, upperStackTokens } from './styles/JoinRoom.styles';
 import { Input } from 'reactstrap';
 import heroSVG from '../assets/hero.svg';
-import { utils } from '../Utils/Utils';
-import { Role } from '@azure/communication-react';
+import { utils, Role } from '../Utils/Utils';
 import { editRoomStyle } from './styles/HomeScreen.styles';
 
 const imageStyleProps: IImageStyles = {

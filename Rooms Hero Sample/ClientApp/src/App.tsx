@@ -8,10 +8,9 @@ import HomeScreen from './components/HomeScreen';
 import JoinRoom from './components/JoinRoom';
 import ConfigurationScreen from './components/Configuration';
 import { loadTheme, initializeIcons } from '@fluentui/react';
-import { utils } from './Utils/Utils';
+import { utils, Role } from './Utils/Utils';
 import { CommunicationUserToken } from '@azure/communication-identity';
 import EditRoom from './components/EditRoom';
-import { Role } from '@azure/communication-react';
 /* eslint-disable */
 const sdkVersion = require('../package.json').dependencies['@azure/communication-calling'];
 const lastUpdated = `Last Updated ${utils.getBuildTime()} with @azure/communication-calling:${sdkVersion}`;

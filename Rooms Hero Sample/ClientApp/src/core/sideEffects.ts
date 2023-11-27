@@ -13,7 +13,7 @@ import {
   CallEndReason,
   RoomCallLocator
 } from '@azure/communication-calling';
-import { CommunicationUserKind } from '@azure/communication-common';
+import { CommunicationIdentifierKind, CommunicationUserKind } from '@azure/communication-common';
 import { Dispatch } from 'redux';
 import { utils } from '../Utils/Utils';
 import { callAdded, callRemoved, setCallState, setParticipants, setCallAgent } from './actions/calls';
@@ -88,7 +88,7 @@ const subscribeToParticipant = (participant: RemoteParticipant, call: Call, disp
 
   participant.on('stateChanged', () => {
     remoteStreamSelector.participantStateChanged(
-      utils.getId(participant.identifier),
+      utils.getId(participant.identifier as CommunicationIdentifierKind),
       participant.displayName ?? '',
       participant.state,
       !participant.isMuted,
@@ -98,7 +98,7 @@ const subscribeToParticipant = (participant: RemoteParticipant, call: Call, disp
   });
 
   participant.on('isMutedChanged', () => {
-    remoteStreamSelector.participantAudioChanged(utils.getId(participant.identifier), !participant.isMuted);
+      remoteStreamSelector.participantAudioChanged(utils.getId(participant.identifier as CommunicationIdentifierKind), !participant.isMuted);
   });
 
   participant.on('isSpeakingChanged', () => {
@@ -121,7 +121,7 @@ const subscribeToParticipant = (participant: RemoteParticipant, call: Call, disp
         }
       } else if (addedStream.mediaStreamType === 'Video') {
         addedStream.on('isAvailableChanged', () => {
-          remoteStreamSelector.participantVideoChanged(utils.getId(participant.identifier), addedStream.isAvailable);
+            remoteStreamSelector.participantVideoChanged(utils.getId(participant.identifier as CommunicationIdentifierKind), addedStream.isAvailable);
         });
       }
     });
