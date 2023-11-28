@@ -2,7 +2,6 @@
 import { AudioDeviceInfo, VideoDeviceInfo, RemoteVideoStream } from '@azure/communication-calling';
 import { CommunicationIdentifierKind } from '@azure/communication-common';
 import { CommunicationUserToken } from '@azure/communication-identity';
-import { Role } from '@azure/communication-react';
 import preval from 'preval.macro';
 import { v4 as uuid } from 'uuid';
 
@@ -11,6 +10,7 @@ export type Room = {
     createdAt: Date;
     validFrom: Date;
     validUntil: Date;
+    pstnDialOutEnabled: boolean;
     participants: RoomParticipant[];
 }
 
@@ -27,6 +27,8 @@ export type UpdateParticipant = {
     role: Role;
     add: boolean;
 }
+
+export type Role = "Presenter" | "Attendee" | "Consumer"
 
 export const utils = {
 
@@ -55,15 +57,12 @@ export const utils = {
         }
         throw new Error('Invalid token response');
     },
-    createRoom: async (identity: string): Promise<string> => {
+    createRoom: async (identity: string, pstnDialOutEnabled: boolean): Promise<string> => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: 'Create Room POST Request'
-            })
         };
-        const response = await fetch(`/createRoom/${identity}`, requestOptions);
+        const response = await fetch(`/createRoom/${identity}?pstnDialOutEnabled=${pstnDialOutEnabled}`, requestOptions);
         if (response.ok) {
             const content = await response.json();
             return content.roomId;

@@ -1,14 +1,15 @@
 // © Microsoft Corporation. All rights reserved.
 
 import React, { useMemo } from 'react';
+import { Role } from '../Utils/Utils'
 import {
     CallComposite,
     fromFlatCommunicationIdentifier,
     useAzureCommunicationCallAdapter,
-    Role,
     CustomCallControlButtonCallback,
     CustomCallControlButtonCallbackArgs,
-    CustomCallControlButtonProps
+    CustomCallControlButtonProps,
+    AzureCommunicationCallAdapterArgs
 } from '@azure/communication-react';
 import { AzureCommunicationTokenCredential, CommunicationUserIdentifier } from '@azure/communication-common';
 export interface ConfigurationScreenProps {
@@ -29,7 +30,6 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
         (args: CustomCallControlButtonCallbackArgs): CustomCallControlButtonProps => {
             return {
                 iconName: "Home",
-                text: "Home",
                 placement: "primary",
                 onItemClick: () => { props.setPage("home") }
             };
@@ -60,7 +60,7 @@ export default (props: ConfigurationScreenProps): JSX.Element => {
         }),
         [userId, credential, displayName, roomId]
     );
-    const callAdapter = useAzureCommunicationCallAdapter(callAdapterArgs);
+    const callAdapter = useAzureCommunicationCallAdapter(callAdapterArgs as unknown as AzureCommunicationCallAdapterArgs);
 
     if (!!callAdapter) {
         return (

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Stack, PrimaryButton, Icon } from '@fluentui/react';
 import { cellStyle, inputTokens, tableStyle, buttonStyle, gridBbuttonStyle } from './styles/EditRoom.styles';
 import { Input } from 'reactstrap';
-import { utils, UpdateParticipant, RoomParticipant } from '../Utils/Utils';
-import { Role } from '@azure/communication-react';
+import { utils, UpdateParticipant, RoomParticipant, Role } from '../Utils/Utils';
 import { iconStyle, listItemStyle, nestedStackTokens, editRoomStyle } from './styles/HomeScreen.styles';
 export interface EditRoomProps {
     roomId: string;
@@ -23,6 +22,7 @@ export default (props: EditRoomProps): JSX.Element => {
     const [updateRoomId, setUpdateRoomId] = useState('');
     const [updateValidFrom, setUpdateValidFrom] = useState(new Date());
     const [updateValidUntil, setUpdateValidUntil] = useState(new Date());
+    const [updatePstnDialOutEnabled, setPstnDialOutEnabled] = useState(false);
     const [foundRoom, setFoundRoom] = useState(false);
     const [updateMode, setUpdateMode] = useState(false);
     const [participantList, setParticipantList] = useState(new Array<RoomParticipant>());
@@ -101,6 +101,7 @@ export default (props: EditRoomProps): JSX.Element => {
                         setUpdateRoomId(currentRoom.roomId);
                         setUpdateValidFrom(currentRoom.validFrom);
                         setUpdateValidUntil(currentRoom.validUntil);
+                        setPstnDialOutEnabled(currentRoom.pstnDialOutEnabled);
                     }
 
                     getRoom();
@@ -144,6 +145,7 @@ export default (props: EditRoomProps): JSX.Element => {
                                 <span style={editRoomStyle}>Room ID:</span><span style={editRoomStyle}><Input type='text' value={updateRoomId} disabled={foundRoom} onChange={e => setUpdateRoomId(e.target.value)} /></span>
                                 <span style={editRoomStyle}>Valid From:</span><span style={editRoomStyle}> <input type="text" value={updateValidFrom.toString()} disabled={foundRoom} /></span>
                                 <span style={editRoomStyle}>Valid Until:</span><span style={editRoomStyle}><input type="text" value={updateValidUntil.toString()} disabled={foundRoom} /></span>
+                                <span style={editRoomStyle}>PSTN Dial Out Enabled:</span><span style={editRoomStyle}><input type="text" value={updatePstnDialOutEnabled.toString()} disabled={foundRoom} /></span>
                             </div>
                         </li>
                         <li className={listItemStyle}>

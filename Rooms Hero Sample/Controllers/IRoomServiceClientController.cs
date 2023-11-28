@@ -7,7 +7,7 @@ namespace Calling
 {
     public interface IRoomServiceClientController
     {
-        Task<IActionResult> CreateRoom(string userId);
+        Task<IActionResult> CreateRoom(string userId, [FromQuery] bool pstnDialOutEnabled);
         Task<IActionResult> GetRoom(string roomId);
         Task<IActionResult> UpdateRoom([FromRoute] string roomId, [FromBody] RoomServiceClientController.UpdateRoomData updateRoomData);
         Task<IActionResult> DeleteUser(string roomId, string userId);

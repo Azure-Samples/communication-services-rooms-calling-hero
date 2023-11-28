@@ -119,6 +119,7 @@ namespace Calling
                     CreatedAt = roomInfo.CreatedAt,
                     ValidFrom = roomInfo.ValidFrom,
                     ValidUntil = roomInfo.ValidUntil,
+                    PstnDialOutEnabled = roomInfo.PstnDialOutEnabled,
                     Participants = participants
                 });
             }
@@ -131,7 +132,7 @@ namespace Calling
 
         [Route("/createRoom/{userId}")]
         [HttpPost]
-        public async Task<IActionResult> CreateRoom(string userId)
+        public async Task<IActionResult> CreateRoom(string userId, [FromQuery] bool pstnDialOutEnabled)
         {
             try
             {
@@ -140,8 +141,15 @@ namespace Calling
                 CommunicationUserIdentifier identifier = new CommunicationUserIdentifier(userId);
                 RoomParticipant participant1 = new RoomParticipant(identifier);
                 List<RoomParticipant> invitedParticipants = new List<RoomParticipant> { participant1 };
+                CreateRoomOptions createOption = new CreateRoomOptions()
+                {
+                    ValidFrom = validFrom,
+                    ValidUntil = validUntil,
+                    Participants = invitedParticipants,
+                    PstnDialOutEnabled = pstnDialOutEnabled,
+                };
 
-                Response<CommunicationRoom> createRoomResponse = await _roomsClient.CreateRoomAsync(validFrom, validUntil, invitedParticipants);
+                Response<CommunicationRoom> createRoomResponse = await _roomsClient.CreateRoomAsync(createOption);
 
                 return this.Ok(new
                 {
