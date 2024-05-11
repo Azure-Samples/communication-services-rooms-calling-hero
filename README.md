@@ -15,6 +15,10 @@ This is a sample application to show how the Azure Communication Services Rooms 
 
 Before contributing to this sample, please read our [contribution guidelines](./CONTRIBUTING.md).
 
+## ❤️ Feedback
+
+We appreciate your feedback and energy helping us improve our services. [If you've tried the service, please give us feedback through this survey](https://microsoft.qualtrics.com/jfe/form/SV_9WTOR2ItSo0oFee). 
+
 ## Prerequisites
 
 - Create an Azure account with an active subscription. For details, see [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
